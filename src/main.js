@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap'
 import '@/assets/css/style.css'
 
+
 Vue.config.productionTip = false
 
 new Vue({
