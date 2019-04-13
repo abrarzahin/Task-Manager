@@ -8,7 +8,7 @@ import TasksCreate from './views/tasks/TasksCreate.vue'
 import TasksEdit from './views/tasks/TasksEdit.vue'
 
 Vue.use(Router)
-const isLoggedIn=true;
+const isLoggedIn=false;
 
 export default new Router({
   base: process.env.BASE_URL,
@@ -73,14 +73,8 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login,
-      beforeEnter: (toolbar, from, next) => {
-        if (!isLoggedIn()) {
-          next();
-        } else {
-          next('/');
-        }
-      }
+      component: Login
+     
      
     },
     {
