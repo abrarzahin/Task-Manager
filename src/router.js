@@ -8,9 +8,9 @@ import TasksCreate from './views/tasks/TasksCreate.vue'
 import TasksEdit from './views/tasks/TasksEdit.vue'
 
 Vue.use(Router)
+const isLoggedIn=true;
 
 export default new Router({
-  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
@@ -22,30 +22,65 @@ export default new Router({
       path: '/tasks',
       name: 'tasks-all',
       component: TasksAll,
+      beforeEnter: (toolbar, from, next) => {
+        if (isLoggedIn()) {
+          next();
+        } else {
+          next('/login');
+        }
+      }
       
     },
     {
       path: '/tasks/new',
       name: 'tasks-create',
       component: TasksCreate,
+      beforeEnter: (toolbar, from, next) => {
+        if (isLoggedIn()) {
+          next();
+        } else {
+          next('/login');
+        }
+      }
       
     },
     {
       path: '/tasks/:id',
       name: 'tasks-edit',
       component: TasksEdit,
+      beforeEnter: (toolbar, from, next) => {
+        if (isLoggedIn()) {
+          next();
+        } else {
+          next('/login');
+        }
+      }
      
     },
     {
       path: '/register',
       name: 'register',
       component: Register,
+      beforeEnter: (toolbar, from, next) => {
+        if (!isLoggedIn()) {
+          next();
+        } else {
+          next('/');
+        }
+      }
      
     },
     {
       path: '/login',
       name: 'login',
       component: Login,
+      beforeEnter: (toolbar, from, next) => {
+        if (!isLoggedIn()) {
+          next();
+        } else {
+          next('/');
+        }
+      }
      
     },
     {
@@ -56,3 +91,4 @@ export default new Router({
   linkActiveClass: 'active',
   mode: 'history'
 })
+
