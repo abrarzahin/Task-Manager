@@ -4,7 +4,10 @@ var _interopRequireDefault = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\
 
 var _express = _interopRequireDefault(require("express"));
 
+var _routes = require("./routes");
+
 var app = (0, _express.default)();
+(0, _routes.registerRoutes)(app);
 app.get('/', function (req, res) {
   return res.send('Hello World!');
 });
