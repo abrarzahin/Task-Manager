@@ -10,8 +10,11 @@ var _routes = require("./routes");
 
 var _env = require("./config/env");
 
+var _db = require("./config/db");
+
 var app = (0, _express.default)();
 (0, _env.setEnvironment)(app);
+(0, _db.connectToDB)();
 (0, _routes.registerRoutes)(app);
 app.get('/', function (req, res) {
   if (!process.env.NODE_ENV || process.env.NODE_ENV.toString().trim() !== 'production') {

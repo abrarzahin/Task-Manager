@@ -44,6 +44,8 @@ function setDevEnv(app) {
   app.use((0, _morgan.default)('dev')); // Log HTTP Requests to the node console (for debugging purposes)
 
   app.use((0, _cors.default)()); // Enable Cross Origin Requests, since Vue.JS is on a different origin
+
+  process.env.DB_URL = 'mongodb://localhost:27017/vue-db';
 }
 /**
  * Used to set production environment variables
@@ -52,6 +54,7 @@ function setDevEnv(app) {
 
 
 function setProdEnv(app) {
+  process.env.DB_URL = 'mongodb://localhost:27017/prod-db';
   app.use(_bodyParser.default.json());
   app.use(_express.default.static(__dirname + '/../../dist'));
 }
