@@ -15,7 +15,7 @@ function index(req, res) {
   var validation = validateIndex(req.body);
 
   if (!validation.isValid) {
-    return res.json({
+    return res.status(400).json({
       message: validation.message
     });
   }
@@ -25,7 +25,7 @@ function index(req, res) {
     password: req.body.password
   };
   console.log(user);
-  return res.json();
+  return res.status(201).json();
 }
 
 function validateIndex(body) {
