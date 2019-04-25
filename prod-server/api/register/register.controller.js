@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireDefault");
+
 var _Object$defineProperty = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property");
 
 _Object$defineProperty(exports, "__esModule", {
@@ -9,6 +11,8 @@ _Object$defineProperty(exports, "__esModule", {
 exports.index = index;
 
 var _stringUtil = require("../../utilities/string-util");
+
+var _userModel = _interopRequireDefault(require("../../model/user-model"));
 
 // User Register
 function index(req, res) {
@@ -20,12 +24,26 @@ function index(req, res) {
     });
   }
 
-  var user = {
-    username: req.body.username.toLowerCase(),
-    password: req.body.password
-  };
-  console.log(user);
-  return res.status(201).json();
+  var user = new _userModel.default({
+    username: req.body.username,
+    password: req.body.password,
+    first: req.body.first,
+    last: req.body.last
+  });
+  user.save(function (error) {
+    if (error) {
+      // Mongoose Error Code 11000 means validation failure (username taken)
+      if (error.code === 11000) {
+        return res.status(403).json({
+          message: 'Username is already taken'
+        });
+      }
+
+      return res.status(500).json();
+    }
+
+    return res.status(201).json();
+  });
 }
 
 function validateIndex(body) {
