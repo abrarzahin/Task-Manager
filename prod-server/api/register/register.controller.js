@@ -57,6 +57,14 @@ function validateIndex(body) {
     errors += 'Password is required. ';
   }
 
+  if (_stringUtil.StringUtil.isEmpty(body.first)) {
+    errors += 'First name is required. ';
+  }
+
+  if (_stringUtil.StringUtil.isEmpty(body.last)) {
+    errors += 'Last name is required. ';
+  }
+
   return {
     isValid: _stringUtil.StringUtil.isEmpty(errors),
     message: errors
