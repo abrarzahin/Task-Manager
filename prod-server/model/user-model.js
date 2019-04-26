@@ -30,7 +30,12 @@ userSchema.virtual('fullName').get(function () {
   var last = _stringUtil.StringUtil.capitalize(this.last.toLowerCase());
 
   return "".concat(first, " ").concat(last);
-}); // Runs validation before saving a user
+}); // Static methods that can be called from anywhere (e.g., User.passwordMatches)
+
+userSchema.statics.passwordMatches = function (password, hash) {
+  return _bcryptNodejs.default.compareSync(password, hash);
+}; // Runs validation before saving a user
+
 
 userSchema.pre('save', function (next) {
   this.username = this.username.toLowerCase();

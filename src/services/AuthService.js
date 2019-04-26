@@ -1,4 +1,5 @@
 import store from '../store';
+import { http } from './HttpService';
 
 
 export function isLoggedIn() {
@@ -6,13 +7,18 @@ export function isLoggedIn() {
     return token != null;
 }
 
-export function login() {
-    const token={
-        username:'abrar'
-    }
-    setToken(token);
-    
+export function login(user) {
+    return http().post('/auth', user)
+        .then(res => {
+            if (res) {
+                const fakeToken={
+                    token: 'my-token'
+                }
+                setToken(fakeToken);
+            }
+        });
 }
+
 
 export function logout() {
     localStorage.clear();
@@ -34,4 +40,7 @@ export function getUsername() {
 }
 export function getUserId() {
     return 1;
+}
+export function registerUser(user) {
+    return http().post('/register', user);
 }

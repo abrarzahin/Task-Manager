@@ -9,6 +9,7 @@
     "dev": "concurrently \"set NODE_ENV=development\" \"babel dev-server --out-dir prod-server --watch\" \"nodemon prod-server/index.js\" \"npm run serve\" "
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-preset-env": "^1.7.0",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",

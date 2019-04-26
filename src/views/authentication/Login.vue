@@ -16,15 +16,25 @@
         </form>
     </div>
 </template>
+
 <script>
     import * as auth from '../../services/AuthService'
 
     export default {
         name: 'login',
+        data: function() {
+            return {
+                username: '',
+                password: ''
+            }
+        },
         methods: {
-            onSubmit: function(event) {
-                event.preventDefault();
-                 auth.login();
+            onSubmit: async function() {
+                const user = {
+                    username: this.username,
+                    password: this.password
+                }
+                await auth.login(user);
                 this.$router.push({ name: 'home' });
             }
         }

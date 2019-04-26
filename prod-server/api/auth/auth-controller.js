@@ -36,7 +36,7 @@ function index(req, res) {
       return res.status(401).json();
     }
 
-    var passwordsMatch = true;
+    var passwordsMatch = _userModel.default.passwordMatches(req.body.password, user.password);
 
     if (!passwordsMatch) {
       return res.status(401).json();
