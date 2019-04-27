@@ -1,5 +1,6 @@
 import { StringUtil } from '../../utilities/string-util';
 import User from '../../model/user-model';
+import { generateJWT } from '../../services/auth-service';
 
 
 export function index(req, res) {
@@ -24,8 +25,8 @@ export function index(req, res) {
         if (!passwordsMatch) {
             return res.status(401).json();
         }
-        return res.status(200).json();
-        
+        const token = generateJWT(user);
+        return res.status(200).json({token: token});
     });
 }
 

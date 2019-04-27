@@ -14,6 +14,8 @@ var _stringUtil = require("../../utilities/string-util");
 
 var _userModel = _interopRequireDefault(require("../../model/user-model"));
 
+var _authService = require("../../services/auth-service");
+
 function index(req, res) {
   // First verify that the user provided a username and a password
   var validation = validateIndex(req.body);
@@ -42,7 +44,10 @@ function index(req, res) {
       return res.status(401).json();
     }
 
-    return res.status(200).json();
+    var token = (0, _authService.generateJWT)(user);
+    return res.status(200).json({
+      token: token
+    });
   });
 }
 /**
