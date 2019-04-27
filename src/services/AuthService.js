@@ -11,10 +11,8 @@ export function login(user) {
     return http().post('/auth', user)
         .then(res => {
             if (res) {
-                const fakeToken={
-                    token: 'my-token'
-                }
-                setToken(fakeToken);
+               
+                setToken(res.data.token);
             }
         });
 }
@@ -26,7 +24,7 @@ export function logout() {
 }
 
 function setToken(token) {
-    localStorage.setItem('token', JSON.stringify(token));
+    localStorage.setItem('token',token);
     store.dispatch('authenticate');
 }
 

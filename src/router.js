@@ -6,12 +6,11 @@ import Register from './views/authentication/Register.vue'
 import TasksAll from './views/tasks/TasksAll.vue'
 import TasksCreate from './views/tasks/TasksCreate.vue'
 import TasksEdit from './views/tasks/TasksEdit.vue'
+import * as auth from './services/AuthService'
 
 Vue.use(Router)
-const isLoggedIn=false;
 
 export default new Router({
-  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -22,60 +21,62 @@ export default new Router({
       path: '/tasks',
       name: 'tasks-all',
       component: TasksAll,
-      beforeEnter: (toolbar, from, next) => {
-        if (isLoggedIn()) {
+      beforeEnter: (to, from, next) => {
+        // Navigation Guard protects this route. User must be logged in, else will be routed to login page
+        if (auth.isLoggedIn()) {
           next();
         } else {
           next('/login');
         }
       }
-      
     },
     {
       path: '/tasks/new',
       name: 'tasks-create',
       component: TasksCreate,
-      beforeEnter: (toolbar, from, next) => {
-        if (isLoggedIn()) {
+      beforeEnter: (to, from, next) => {
+        if (auth.isLoggedIn()) {
           next();
         } else {
           next('/login');
         }
       }
-      
     },
     {
       path: '/tasks/:id',
       name: 'tasks-edit',
       component: TasksEdit,
-      beforeEnter: (toolbar, from, next) => {
-        if (isLoggedIn()) {
+      beforeEnter: (to, from, next) => {
+        if (auth.isLoggedIn()) {
           next();
         } else {
           next('/login');
         }
       }
-     
     },
     {
       path: '/register',
       name: 'register',
       component: Register,
-      beforeEnter: (toolbar, from, next) => {
-        if (!isLoggedIn()) {
+      beforeEnter: (to, from, next) => {
+        if (!auth.isLoggedIn()) {
           next();
         } else {
           next('/');
         }
       }
-     
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
-     
-     
+      component: Login,
+      beforeEnter: (to, from, next) => {
+        if (!auth.isLoggedIn()) {
+          next();
+        } else {
+          next('/');
+        }
+      }
     },
     {
       path: '*',
@@ -85,4 +86,3 @@ export default new Router({
   linkActiveClass: 'active',
   mode: 'history'
 })
-
