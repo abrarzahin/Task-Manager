@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireWildcard = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireWildcard");
+
 var _interopRequireDefault = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireDefault");
 
 var _Object$defineProperty = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property");
@@ -24,6 +26,8 @@ var _taskModel = _interopRequireDefault(require("../../model/task-model"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
+var auth = _interopRequireWildcard(require("../../services/auth-service"));
+
 function index(req, res) {
   // FIND ALL TASKS
   _taskModel.default.find({}, function (error, tasks) {
@@ -39,7 +43,7 @@ function index(req, res) {
 }
 
 function create(req, res) {
-  var id = 10;
+  var id = auth.getUserId(req);
 
   _userModel.default.findOne({
     _id: id
@@ -62,7 +66,7 @@ function create(req, res) {
 }
 
 function update(req, res) {
-  var id = 10;
+  var id = auth.getUserId(req);
 
   _userModel.default.findOne({
     _id: id
@@ -92,7 +96,7 @@ function update(req, res) {
 }
 
 function remove(req, res) {
-  var id = 5;
+  var id = auth.getUserId(req);
 
   _taskModel.default.findOne({
     _id: req.params.id
