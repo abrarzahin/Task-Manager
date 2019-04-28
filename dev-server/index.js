@@ -1,15 +1,16 @@
 import express from 'express';
 const app = express();
-import {registerRoutes} from './routes';
+import { registerRoutes } from './routes';
 import { setEnvironment } from './config/env';
 import { connectToDB } from './config/db';
-
 
 setEnvironment(app);
 connectToDB();
 registerRoutes(app);
 
-app.get('/', (req, res) => {
+// All non-API requests made to the server, for example, http://www.homepage.com/,
+// will hit this request, which just returns the main layout, html file
+app.get('*', (req, res) => {
     if (!process.env.NODE_ENV || process.env.NODE_ENV.toString().trim() !== 'production') {
         return res.send(
             'Running server in development mode.'

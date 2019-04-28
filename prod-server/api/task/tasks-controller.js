@@ -1,15 +1,13 @@
 "use strict";
 
-var _interopRequireWildcard = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireWildcard");
-
-var _interopRequireDefault = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireDefault");
-
-var _Object$defineProperty = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property");
+import _Object$defineProperty from "C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property";
 
 _Object$defineProperty(exports, "__esModule", {
   value: true
 });
 
+import _interopRequireWildcard from "C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/esm/interopRequireWildcard";
+import _interopRequireDefault from "C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/esm/interopRequireDefault";
 exports.index = index;
 exports.create = create;
 exports.update = update;
@@ -20,17 +18,25 @@ require("core-js/modules/es6.regexp.to-string");
 
 require("core-js/modules/es6.array.find");
 
-var _userModel = _interopRequireDefault(require("../../model/user-model"));
+var _userModel = require("../../model/user-model");
 
-var _taskModel = _interopRequireDefault(require("../../model/task-model"));
+var _userModel2 = _interopRequireDefault(_userModel);
 
-var _moment = _interopRequireDefault(require("moment"));
+var _taskModel = require("../../model/task-model");
 
-var auth = _interopRequireWildcard(require("../../services/auth-service"));
+var _taskModel2 = _interopRequireDefault(_taskModel);
+
+var _moment = require("moment");
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _authService = require("../../services/auth-service");
+
+var auth = _interopRequireWildcard(_authService);
 
 function index(req, res) {
   // FIND ALL TASKS
-  _taskModel.default.find({}, function (error, tasks) {
+  _taskModel2.default.find({}, function (error, tasks) {
     if (error) {
       return res.status(500).json();
     }
@@ -45,16 +51,16 @@ function index(req, res) {
 function create(req, res) {
   var id = auth.getUserId(req);
 
-  _userModel.default.findOne({
+  _userModel2.default.findOne({
     _id: id
   }, function (error, user) {
     if (error && !user) {
       return res.status(500).json();
     }
 
-    var task = new _taskModel.default(req.body.task);
+    var task = new _taskModel2.default(req.body.task);
     task.author = user._id;
-    task.dueDate = (0, _moment.default)(task.dueDate);
+    task.dueDate = (0, _moment2.default)(task.dueDate);
     task.save(function (error) {
       if (error) {
         return res.status(500).json();
@@ -68,7 +74,7 @@ function create(req, res) {
 function update(req, res) {
   var id = auth.getUserId(req);
 
-  _userModel.default.findOne({
+  _userModel2.default.findOne({
     _id: id
   }, function (error, user) {
     if (error) {
@@ -79,11 +85,11 @@ function update(req, res) {
       return res.status(404).json();
     }
 
-    var task = new _taskModel.default(req.body.task);
+    var task = new _taskModel2.default(req.body.task);
     task.author = user._id;
-    task.dueDate = (0, _moment.default)(task.dueDate); // Formats the due date to a proper date format
+    task.dueDate = (0, _moment2.default)(task.dueDate); // Formats the due date to a proper date format
 
-    _taskModel.default.findByIdAndUpdate({
+    _taskModel2.default.findByIdAndUpdate({
       _id: task._id
     }, task, function (error) {
       if (error) {
@@ -98,7 +104,7 @@ function update(req, res) {
 function remove(req, res) {
   var id = auth.getUserId(req);
 
-  _taskModel.default.findOne({
+  _taskModel2.default.findOne({
     _id: req.params.id
   }, function (error, task) {
     if (error) {
@@ -115,7 +121,7 @@ function remove(req, res) {
       });
     }
 
-    _taskModel.default.deleteOne({
+    _taskModel2.default.deleteOne({
       _id: req.params.id
     }, function (error) {
       if (error) {
@@ -129,7 +135,7 @@ function remove(req, res) {
 
 function show(req, res) {
   // GET TASK BY ID
-  _taskModel.default.findOne({
+  _taskModel2.default.findOne({
     _id: req.params.id
   }, function (error, task) {
     if (error) {

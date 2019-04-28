@@ -1,24 +1,31 @@
 "use strict";
 
-var _interopRequireDefault = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireDefault");
-
-var _Object$defineProperty = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property");
+import _Object$defineProperty from "C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property";
 
 _Object$defineProperty(exports, "__esModule", {
   value: true
 });
 
+import _interopRequireDefault from "C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/esm/interopRequireDefault";
 exports.setEnvironment = setEnvironment;
 
 require("core-js/modules/es6.regexp.to-string");
 
-var _express = _interopRequireDefault(require("express"));
+var _express = require("express");
 
-var _morgan = _interopRequireDefault(require("morgan"));
+var _express2 = _interopRequireDefault(_express);
 
-var _cors = _interopRequireDefault(require("cors"));
+var _morgan = require("morgan");
 
-var _bodyParser = _interopRequireDefault(require("body-parser"));
+var _morgan2 = _interopRequireDefault(_morgan);
+
+var _cors = require("cors");
+
+var _cors2 = _interopRequireDefault(_cors);
+
+var _bodyParser = require("body-parser");
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
 /**
  * Determines the current environment and sets the appropriate variables
@@ -39,13 +46,14 @@ function setEnvironment(app) {
 
 function setDevEnv(app) {
   process.env.NODE_ENV = 'development';
+  app.use(_bodyParser2.default.json()); // Allows parsing JSON from the client
+
+  app.use((0, _morgan2.default)('dev')); // Log HTTP Requests to the node console (for debugging purposes)
+
+  app.use((0, _cors2.default)()); // Enable Cross Origin Requests, since Vue.JS is on a different origin
+
   process.env.DB_URL = 'mongodb://localhost:27017/vue-db';
-  process.env.TOKEN_SECRET = 'my-development-secret';
-  app.use(_bodyParser.default.json()); // Allows parsing JSON from the client
-
-  app.use((0, _morgan.default)('dev')); // Log HTTP Requests to the node console (for debugging purposes)
-
-  app.use((0, _cors.default)()); // Enable Cross Origin Requests, since Vue.JS is on a different origin
+  process.env.TOKEN_SECRET = '27946982a9a4408996607fe95a6299f9';
 }
 /**
  * Used to set production environment variables
@@ -54,8 +62,9 @@ function setDevEnv(app) {
 
 
 function setProdEnv(app) {
-  process.env.DB_URL = 'mongodb://localhost:27017/prod-db';
-  process.env.TOKEN_SECRET = 'my-production-secret';
-  app.use(_bodyParser.default.json());
-  app.use(_express.default.static(__dirname + '/../../dist'));
+  process.env.NODE_ENV = 'production';
+  process.env.DB_URL = 'mongodb://user:password123@ds133642.mlab.com:33642/vue-db';
+  process.env.TOKEN_SECRET = '9f4d50bfa6b2450a9ec766fc5104948e';
+  app.use(_bodyParser2.default.json());
+  app.use(_express2.default.static(__dirname + '/../../dist'));
 }

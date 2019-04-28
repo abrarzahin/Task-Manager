@@ -1,18 +1,19 @@
 "use strict";
 
-var _interopRequireDefault = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireDefault");
-
-var _Object$defineProperty = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property");
+import _Object$defineProperty from "C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property";
 
 _Object$defineProperty(exports, "__esModule", {
   value: true
 });
 
+import _interopRequireDefault from "C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/esm/interopRequireDefault";
 exports.index = index;
 
 var _stringUtil = require("../../utilities/string-util");
 
-var _userModel = _interopRequireDefault(require("../../model/user-model"));
+var _userModel = require("../../model/user-model");
+
+var _userModel2 = _interopRequireDefault(_userModel);
 
 // User Register
 function index(req, res) {
@@ -24,7 +25,7 @@ function index(req, res) {
     });
   }
 
-  var user = new _userModel.default({
+  var user = new _userModel2.default({
     username: req.body.username,
     password: req.body.password,
     first: req.body.first,

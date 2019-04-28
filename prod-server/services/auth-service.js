@@ -1,20 +1,21 @@
 "use strict";
 
-var _interopRequireDefault = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireDefault");
-
-var _Object$defineProperty = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property");
+import _Object$defineProperty from "C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property";
 
 _Object$defineProperty(exports, "__esModule", {
   value: true
 });
 
+import _interopRequireDefault from "C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/esm/interopRequireDefault";
 exports.generateJWT = generateJWT;
 exports.requireLogin = requireLogin;
 exports.decodeToken = decodeToken;
 exports.getUsername = getUsername;
 exports.getUserId = getUserId;
 
-var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
+var _jsonwebtoken = require("jsonwebtoken");
+
+var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
 /**
  * Used to perform all authentication-related operations
@@ -25,7 +26,7 @@ function generateJWT(user) {
     username: user.username,
     id: user._id
   };
-  return _jsonwebtoken.default.sign({
+  return _jsonwebtoken2.default.sign({
     user: tokenData
   }, process.env.TOKEN_SECRET);
 }
@@ -56,7 +57,7 @@ function decodeToken(req) {
   }
 
   try {
-    return _jsonwebtoken.default.verify(token, process.env.TOKEN_SECRET);
+    return _jsonwebtoken2.default.verify(token, process.env.TOKEN_SECRET);
   } catch (error) {
     return null;
   }

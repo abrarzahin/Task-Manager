@@ -9,6 +9,7 @@ export function generateJWT(user) {
     const tokenData = { username: user.username, id: user._id };
     return jwt.sign({ user: tokenData }, process.env.TOKEN_SECRET);
 }
+
 export function requireLogin(req, res, next) {
     const token = decodeToken(req);
     if (!token) {
@@ -35,6 +36,7 @@ export function decodeToken(req) {
         return null;
     }
 }
+
 export function getUsername(req) {
     const token = decodeToken(req);
     if (!token) {

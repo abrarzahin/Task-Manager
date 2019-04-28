@@ -1,7 +1,6 @@
 import { StringUtil } from '../../utilities/string-util';
 import User from '../../model/user-model';
 
-
 // User Register
 export function index(req, res) {
     const validation = validateIndex(req.body);
@@ -26,6 +25,7 @@ export function index(req, res) {
         return res.status(201).json();
     });
 }
+
 function validateIndex(body) {
     let errors = '';
     if (StringUtil.isEmpty(body.username)) {

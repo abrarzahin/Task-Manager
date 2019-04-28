@@ -1,18 +1,19 @@
 "use strict";
 
-var _interopRequireDefault = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireDefault");
-
-var _Object$defineProperty = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property");
+import _Object$defineProperty from "C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property";
 
 _Object$defineProperty(exports, "__esModule", {
   value: true
 });
 
+import _interopRequireDefault from "C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/esm/interopRequireDefault";
 exports.index = index;
 
 var _stringUtil = require("../../utilities/string-util");
 
-var _userModel = _interopRequireDefault(require("../../model/user-model"));
+var _userModel = require("../../model/user-model");
+
+var _userModel2 = _interopRequireDefault(_userModel);
 
 var _authService = require("../../services/auth-service");
 
@@ -27,7 +28,7 @@ function index(req, res) {
   } // Find the user in the database
 
 
-  _userModel.default.findOne({
+  _userModel2.default.findOne({
     username: req.body.username.toLowerCase()
   }, function (error, user) {
     if (error) {
@@ -38,7 +39,7 @@ function index(req, res) {
       return res.status(401).json();
     }
 
-    var passwordsMatch = _userModel.default.passwordMatches(req.body.password, user.password);
+    var passwordsMatch = _userModel2.default.passwordMatches(req.body.password, user.password);
 
     if (!passwordsMatch) {
       return res.status(401).json();

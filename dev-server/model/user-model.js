@@ -9,12 +9,14 @@ const userSchema = new mongoose.Schema({
     password: String
 });
 userSchema.set('timestamps', true);
+
 // Returns a transient field client-side without actually adding it to the schema
 userSchema.virtual('fullName').get(function() {
     const first = StringUtil.capitalize(this.first.toLowerCase());
     const last = StringUtil.capitalize(this.last.toLowerCase());
     return `${first} ${last}`;
 });
+
 // Static methods that can be called from anywhere (e.g., User.passwordMatches)
 userSchema.statics.passwordMatches = function(password, hash) {
     return bcrypt.compareSync(password, hash);
