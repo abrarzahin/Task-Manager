@@ -1,23 +1,24 @@
-"use strict";
+'use strict';
 
-var _interopRequireWildcard = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireWildcard");
-
-var _interopRequireDefault = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireDefault");
-
-var _Object$defineProperty = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property");
-
-_Object$defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = void 0;
+var _express = require('express');
 
-var _express = _interopRequireDefault(require("express"));
+var _express2 = _interopRequireDefault(_express);
 
-var controller = _interopRequireWildcard(require("./register.controller"));
+var _register = require('./register.controller');
 
-var router = _express.default.Router();
+var controller = _interopRequireWildcard(_register);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
+
 
 router.post('/register', controller.index);
-var _default = router;
-exports.default = _default;
+
+exports.default = router;

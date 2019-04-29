@@ -18,6 +18,7 @@ a.navbar-brand {
 li.nav-item a {
     text-transform: uppercase;
 }
+
 @media screen and (max-width: 767px) {
     div#navbarCollapse {
         width: 100%;
@@ -29,6 +30,7 @@ li.nav-item a {
         background-color: #373f46;
     }
 }
+
 div#app-container {
     position: fixed;
     top: 96px;
@@ -36,12 +38,13 @@ div#app-container {
     bottom: 96px;
     width: 100%;
     padding: 2rem;
-    background-color: #1d2733;
+    background-color: #ffffff;
     overflow: auto;
 }
+
 footer#custom-footer {
     height: 6rem;
-    background-color: #373f46;
+    background-color: #000000;
     font-size: 1rem;
     position: fixed;
     bottom: 0;
@@ -70,6 +73,7 @@ div#custom-home {
 .btn-success:hover {
     background-color: #3da978;
 }
+
 form.custom-form {
     max-width: 40rem;
     display: flex;
@@ -78,4 +82,11 @@ form.custom-form {
     margin-right: auto;
 }
 
+.modal-title,
+.modal-body p {
+    color: #000 !important;
+}
 
+.late {
+    color: #dc3545;
+}

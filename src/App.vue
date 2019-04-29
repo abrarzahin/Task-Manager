@@ -22,6 +22,5 @@
       // Ensure that on app boot, we check if the user is authenticated or not
       this.$store.dispatch('authenticate');
     }
-    
   }
 </script>

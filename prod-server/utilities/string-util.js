@@ -1,42 +1,33 @@
 "use strict";
 
-var _interopRequireDefault = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireDefault");
-
-var _Object$defineProperty = require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/core-js/object/define-property");
-
-_Object$defineProperty(exports, "__esModule", {
-  value: true
+Object.defineProperty(exports, "__esModule", {
+    value: true
 });
 
-exports.StringUtil = void 0;
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _classCallCheck2 = _interopRequireDefault(require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/esm/classCallCheck"));
-
-var _createClass2 = _interopRequireDefault(require("C:\\Users\\Abrar Zahin\\Desktop\\taskman\\node_modules\\@babel\\runtime-corejs2/helpers/esm/createClass"));
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
  * Performs common operations for strings, such as checking
  * if the string is empty or null
  */
-var StringUtil =
-/*#__PURE__*/
-function () {
-  function StringUtil() {
-    (0, _classCallCheck2.default)(this, StringUtil);
-  }
+var StringUtil = exports.StringUtil = function () {
+    function StringUtil() {
+        _classCallCheck(this, StringUtil);
+    }
 
-  (0, _createClass2.default)(StringUtil, null, [{
-    key: "isEmpty",
-    value: function isEmpty(value) {
-      return !value || !value.trim();
-    }
-  }, {
-    key: "capitalize",
-    value: function capitalize(word) {
-      return word.charAt(0).toUpperCase();
-    }
-  }]);
-  return StringUtil;
+    _createClass(StringUtil, null, [{
+        key: "isEmpty",
+        value: function isEmpty(value) {
+            return !value || !value.trim();
+        }
+    }, {
+        key: "capitalize",
+        value: function capitalize(word) {
+            return word.charAt(0).toUpperCase();
+        }
+    }]);
+
+    return StringUtil;
 }();
-
-exports.StringUtil = StringUtil;
